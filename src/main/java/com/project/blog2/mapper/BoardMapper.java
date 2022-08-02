@@ -2,8 +2,9 @@ package com.project.blog2.mapper;
 
 import com.project.blog2.domain.Board;
 import com.project.blog2.domain.User;
-import com.project.blog2.dto.board.BoardRequestDto;
+import com.project.blog2.dto.board.BoardPostDto;
 import com.project.blog2.dto.board.BoardResponseDto;
+import com.project.blog2.dto.board.BoardUpdateDto;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -20,14 +21,27 @@ public interface BoardMapper {
     MemberDto.response memberToMemberResponse(Member member);
     List<MemberDto.response> membersToMemberResponses(List<Member> members);*/
 
-//Board boardRequestDtoToBoard(BoardRequestDto boardRequestDto);
-List<BoardResponseDto> boardToBoardResponseDtos(List<Board> boards);
-
-default Board boardRequestDtoToBoard(BoardRequestDto boardRequestDto) {
-    Board board = new Board();
+default Board boardPostDtoToBoard(BoardPostDto boardPostDto) {
     User user = new User();
-    board.getUser().getId();
-
-   return board;
+    Board board = new Board();
+    board.setAuthor(boardPostDto.getUserName());
+    //수정 필요 (List 추가 예정)
+    return board;
 }
+
+Board boardUpdateDtoToBoard(BoardUpdateDto boardUpdateDto);
+default BoardResponseDto boardToBoardResponseDto(Board board) {
+    BoardResponseDto boardResponseDto = new BoardResponseDto();
+    boardResponseDto.setId(board.getId());
+    boardResponseDto.setTitle(board.getTitle());
+    boardResponseDto.setContent(board.getContent());
+    boardResponseDto.setAuthor(board.getAuthor());
+    boardResponseDto.setCount(board.getCount());
+    boardResponseDto.setRegisterTime(board.getCreatedAt());
+
+    return boardResponseDto;
+}
+
+List<BoardResponseDto> boardToBoardResponseDto(List<Board> boards);
+
 }

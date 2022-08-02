@@ -1,6 +1,6 @@
 package com.project.blog2.controller;
 
-import com.project.blog2.dto.board.BoardRequestDto;
+import com.project.blog2.dto.board.BoardPostDto;
 import com.project.blog2.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -29,16 +29,16 @@ public class BoardController {
 
     //글 작성 페이지 매핑
     @GetMapping("/write")
-    public String writeBoard(Model model, BoardRequestDto boardRequestDto) {
+    public String writeBoard(Model model, BoardPostDto boardPostDto) {
         return "/board/write";
     }
 
      //글 상세조회 페이지 매핑
     @GetMapping("/view")
-    public String viewBoard(Model model , BoardRequestDto boardRequestDto) throws Exception {
+    public String viewBoard(Model model , BoardPostDto boardPostDto) throws Exception {
         try {
-            if (boardRequestDto.getId() != null) {
-                model.addAttribute("info", boardService.findBoardById(boardRequestDto.getId()));
+            if (boardPostDto.getId() != null) {
+                model.addAttribute("info", boardService.findBoardById(boardPostDto.getId()));
             }
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -48,9 +48,9 @@ public class BoardController {
 
     //글 작성하고 등록 액션 메서드
     @PostMapping("/write/action")
-    public String writeBoardAction(Model model, BoardRequestDto boardRequestDto, MultipartHttpServletRequest multiRequest) throws  Exception {
+    public String writeBoardAction(Model model, BoardPostDto boardPostDto, MultipartHttpServletRequest multiRequest) throws  Exception {
         try {
-            if (!boardService.save(boardRequestDto, multiRequest)) {
+            if (!boardService.save(boardPostDto, multiRequest)) {
                 throw new Exception("#Exception boardWriteAction!");
             }
         } catch (Exception e) {
@@ -60,7 +60,7 @@ public class BoardController {
     }
 
     @PostMapping("/view/action")
-    public String boardViewAction(Model model, BoardRequestDto boardRequestDto, MultipartHttpServletRequest multiRequest) throws Exception {
+    public String boardViewAction(Model model, BoardPostDto boardPostDto, MultipartHttpServletRequest multiRequest) throws Exception {
 //        try {
 //            //boolean result = boardService.updateBoard(boardRequestDto, multiRequest);
 //            if(!result) {

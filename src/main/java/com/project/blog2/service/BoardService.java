@@ -1,9 +1,9 @@
 package com.project.blog2.service;
 
 import com.project.blog2.domain.Board;
-import com.project.blog2.dto.board.BoardRequestDto;
+import com.project.blog2.dto.board.BoardPostDto;
 import com.project.blog2.dto.board.BoardResponseDto;
-import com.project.blog2.dto.board.BoardUpdateRequestDto;
+import com.project.blog2.dto.board.BoardUpdateDto;
 import com.project.blog2.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -21,7 +21,7 @@ public class BoardService {
 
     //게시글 저장
     @Transactional
-    public Long create(BoardRequestDto boardSaveDto, MultipartHttpServletRequest multiRequest) throws Exception {
+    public Long create(BoardPostDto boardSaveDto, MultipartHttpServletRequest multiRequest) throws Exception {
 //        Board result = boardRepository.save(boardSaveDto.toEntity());
         return boardRepository.save(boardSaveDto.toEntity()).getId();
     }
@@ -40,7 +40,7 @@ public class BoardService {
 
     //게시글 수정
     @Transactional
-    public Long update(Long id, BoardUpdateRequestDto requestDto) {
+    public Long update(Long id, BoardUpdateDto requestDto) {
         Board board = boardRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다."));
 
@@ -54,12 +54,12 @@ public class BoardService {
     }
 
 
-    public int updateBoard(BoardRequestDto boardRequestDto, MultipartHttpServletRequest multiRequest) throws Exception {
-        int result = boardRepository.updateBoard(boardRequestDto);
-        return boardRepository.updateBoard(boardRequestDto);
+    public int updateBoard(BoardPostDto boardPostDto, MultipartHttpServletRequest multiRequest) throws Exception {
+        int result = boardRepository.updateBoard(boardPostDto);
+        return boardRepository.updateBoard(boardPostDto);
     }
 
-    public boolean save(BoardRequestDto boardRequestDto, MultipartHttpServletRequest multiRequest) {
+    public boolean save(BoardPostDto boardPostDto, MultipartHttpServletRequest multiRequest) {
         return true;
     }
 
