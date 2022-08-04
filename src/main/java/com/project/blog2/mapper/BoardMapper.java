@@ -42,6 +42,7 @@ default BoardResponseDto boardToBoardResponseDto(Board board) {
     return boardResponseDto;
 }
 
-List<BoardResponseDto> boardToBoardResponseDto(List<Board> boards);
+List<BoardResponseDto> boardsToBoardResponseDto(List<Board> boards);
+//BoardResponseDto boardToBoardResponse(Board board);
 
 }
