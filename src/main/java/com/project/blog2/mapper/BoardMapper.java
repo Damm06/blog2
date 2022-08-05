@@ -21,13 +21,15 @@ public interface BoardMapper {
     MemberDto.response memberToMemberResponse(Member member);
     List<MemberDto.response> membersToMemberResponses(List<Member> members);*/
 
-default Board boardPostDtoToBoard(BoardPostDto boardPostDto) {
-    User user = new User();
-    Board board = new Board();
-    board.setAuthor(boardPostDto.getUserName());
-    //수정 필요 (List 추가 예정)
-    return board;
-}
+//default Board boardPostDtoToBoard(BoardPostDto boardPostDto) {
+//    User user = new User();
+//    Board board = new Board();
+//    board.setAuthor(boardPostDto.getUserName());
+//    //수정 필요 (List 추가 예정)
+//    return board;
+//}
+
+    Board boardPostDtoToBoard(BoardPostDto boardPostDto);
 
 Board boardUpdateDtoToBoard(BoardUpdateDto boardUpdateDto);
 default BoardResponseDto boardToBoardResponseDto(Board board) {

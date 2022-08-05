@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import java.util.Optional;
 
 //@RequiredArgsConstructor
-//@Transactional
+@Transactional
 @Service
 public class BoardService {
 
@@ -42,14 +42,14 @@ public class BoardService {
 //    }
 
     //게시글 목록 페이징 조회
-//    @Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     public Page<Board> findBoardList(Pageable pageable) {
         pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber()-1, pageable.getPageSize());
         return boardRepository.findAll(pageable);
     }
 
     //게시글 ID로 조회
-//    @Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     public Board findBoardById(Long id) {
         return findVerifiedBoard(id);
     }
@@ -63,7 +63,7 @@ public class BoardService {
 //        updateBoard.update(requestDto.getTitle(), requestDto.getContent());
 //        return id;
 //    }
-//    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     public Board updateBoard(Board board) {
         Board findBoard = findVerifiedBoard(board.getId());
 
@@ -77,7 +77,7 @@ public class BoardService {
     }
 
     //게시글 하나 삭제
-    public void deleteBoardById(Long id) {
+    public void deleteBoard(Long id) {
         Board findBoard = findVerifiedBoard(id);
         boardRepository.delete(findBoard);
     }
@@ -91,7 +91,7 @@ public class BoardService {
         return boardRepository.save(board);
     }
 
-//@Transactional(readOnly = true) //글이 있는지 조회
+@Transactional(readOnly = true) //글이 있는지 조회
     private Board findVerifiedBoard(long id) {
         Optional<Board> optionalBoard = boardRepository.findById(id);
         Board findBoard =
