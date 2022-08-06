@@ -1,6 +1,6 @@
 package com.project.blog2.domain;
 
-import com.project.blog2.audit.Auditable;
+import com.project.blog2.audit.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-public class Board extends Auditable {
+public class Board extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
