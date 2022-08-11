@@ -3,6 +3,7 @@ package com.project.blog2.mapper;
 import com.project.blog2.domain.Board;
 import com.project.blog2.domain.User;
 import com.project.blog2.dto.board.BoardPostDto;
+import com.project.blog2.dto.board.BoardRequest;
 import com.project.blog2.dto.board.BoardResponseDto;
 import com.project.blog2.dto.board.BoardUpdateDto;
 import org.mapstruct.Mapper;
@@ -29,16 +30,30 @@ public interface BoardMapper {
 //    return board;
 //}
 
-    Board boardPostDtoToBoard(BoardPostDto boardPostDto);
+    default Board boardPostDtoToBoard(BoardRequest boardRequest) {
+        User user = new User();
+        Board board = new Board();
+        board.setUser(user);
+        return board;
+    }
+
+//    default Board boardPostDtoToBoard(BoardPostDto boardPostDto) {
+//        User user = new User();
+//        Board board = new Board();
+//        board.setAuthor(user.getId());
+//        return board;
+//    }
 
 Board boardUpdateDtoToBoard(BoardUpdateDto boardUpdateDto);
 default BoardResponseDto boardToBoardResponseDto(Board board) {
     BoardResponseDto boardResponseDto = new BoardResponseDto();
+    //BoardResponseDto boardResponseDto = new BoardResponseDto();
     boardResponseDto.setId(board.getId());
     boardResponseDto.setTitle(board.getTitle());
     boardResponseDto.setContent(board.getContent());
-    boardResponseDto.setAuthor(board.getAuthor());
-    boardResponseDto.setCount(board.getCount());
+    boardResponseDto.setUser(board.getUser());
+//    boardResponseDto.setAuthor(board.getAuthor());
+//    boardResponseDto.setCount(board.getCount());
     boardResponseDto.setRegisterTime(board.getCreatedAt());
 
     return boardResponseDto;

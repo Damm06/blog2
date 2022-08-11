@@ -2,6 +2,7 @@ package com.project.blog2.dto.board;
 
 import com.project.blog2.domain.Board;
 import com.project.blog2.domain.User;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
+
 
 @Getter
 @Setter
@@ -21,7 +23,7 @@ public class BoardResponseDto {
     private String title;
     private String content;
     private int count;
-    private String author;
+    private User user;
     private LocalDateTime registerTime;
 
     //Board Entity를 BoardResponseDto에 맞게 변환하는 생성자 생성.

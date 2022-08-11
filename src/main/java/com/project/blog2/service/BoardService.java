@@ -1,12 +1,16 @@
 package com.project.blog2.service;
 
+import com.project.blog2.config.auth.PrincipalDetails;
 import com.project.blog2.domain.Board;
+import com.project.blog2.domain.User;
 import com.project.blog2.dto.board.BoardPostDto;
+import com.project.blog2.dto.board.BoardRequest;
 import com.project.blog2.dto.board.BoardResponseDto;
 import com.project.blog2.dto.board.BoardUpdateDto;
 import com.project.blog2.exception.BusinessLogicException;
 import com.project.blog2.exception.ExceptionCode;
 import com.project.blog2.repository.BoardRepository;
+import com.project.blog2.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,16 +29,23 @@ import java.util.Optional;
 public class BoardService {
 
     private final BoardRepository boardRepository;
+    private final UserRepository userRepository;
 
-    public BoardService(BoardRepository boardRepository) {
+    public BoardService(BoardRepository boardRepository, UserRepository userRepository) {
         this.boardRepository = boardRepository;
+        this.userRepository = userRepository;
     }
 
     //게시글 저장
-    public Board createBoard(Board board) {
-        Board savedBoard = saveBoard(board);
-        return savedBoard;
+    public Long createBoard(BoardRequest boardRequest, User loginUser) {
+        Board board = boardRepository.save(boardRequest.toBoardWithLoginUser(loginUser));
+        return board.getId();
+
     }
+//    public Board createBoard(Board board) {
+//        Board savedBoard = saveBoard(board);
+//        return savedBoard;
+//    }
 //    @Transactional
 //    public Long create(BoardPostDto boardSaveDto, MultipartHttpServletRequest multiRequest) throws Exception {
 ////        Board result = boardRepository.save(boardSaveDto.toEntity());

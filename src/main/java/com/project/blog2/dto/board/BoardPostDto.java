@@ -11,10 +11,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class BoardPostDto {
 
-
     private String title;
     private String content;
-    private String author;
+
+
 
 
     //이 부분은 User 서비스랑 컨트롤러 구현하고 다시 수정해서 추가 예정

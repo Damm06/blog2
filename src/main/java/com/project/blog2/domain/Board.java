@@ -1,14 +1,12 @@
 package com.project.blog2.domain;
 
 import com.project.blog2.audit.BaseTimeEntity;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @NoArgsConstructor
+//@AllArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -25,21 +23,26 @@ public class Board extends BaseTimeEntity {
     @Lob
     private String content;
 
-    private int count;
+//    private int count;
 
-    private String author;
+//    private User user;
 
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
 
     @Builder
-    public Board(Long id, String title, String content, int count, String author) {
+    public Board(Long id, String title, String content, User user) {
         this.id = id;
         this.title = title;
         this.content = content;
-        this.author = author;
-        this.count = count;
+        this.user = user;
+    }
+
+    public Board(String title, String content, User loginUser) {
+        this.title = title;
+        this.content = content;
+        this.user = loginUser;
     }
 
     public void update(String title, String content) {

@@ -4,8 +4,8 @@ import lombok.Getter;
 
 public enum ExceptionCode {
 
-    MEMBER_NOT_FOUND(404, "Member not found"),
-    MEMBER_EXISTS(409, "Member exists"),
+    USER_NOT_FOUND(404, "User not found"),
+    USER_EXISTS(409, "User exists"),
     BOARD_NOT_FOUND(404, "Board not found"),
     AUTHOR_NOT_EXISTS(409, "Author not Exists"),
     CANNOT_CHANGE_BOARD(403, "Board can not change"),

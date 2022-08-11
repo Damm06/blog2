@@ -43,6 +43,12 @@ public class BoardController {
                 HttpStatus.CREATED);
     }
 
+    //        Long boardId = boardService.createBoard(boardRequest, loginUser);
+    //
+    //        return new ResponseEntity<>(
+    //                new SingleResponseDto<>(boardId),
+    //                HttpStatus.CREATED);
+
     //글 수정
     @PutMapping("/{id}")
     public ResponseEntity putBoard(@PathVariable long id,
