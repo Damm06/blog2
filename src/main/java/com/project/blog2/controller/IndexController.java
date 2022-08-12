@@ -80,18 +80,4 @@ public class IndexController {
         return "data";
     }
 
-    @GetMapping("/blog/loginTest")
-    public @ResponseBody String loginTest(Authentication authentication) {
-        System.out.println("=======/loginTest========");
-        PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
-        System.out.println("authentication : " + principalDetails.getUser());
-        return "세션 정보 확인";
-    }
-
-    @GetMapping("/blog/loginTest2")
-    public @ResponseBody String loginTest2(@AuthenticationPrincipal PrincipalDetails principalDetails) {
-        System.out.println("=========/loginTest2========");
-        System.out.println("userDetails : " + principalDetails.getUser());
-        return "세션 정보 확인2";
-    }
 }

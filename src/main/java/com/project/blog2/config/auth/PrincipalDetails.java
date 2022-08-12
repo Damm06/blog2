@@ -12,13 +12,17 @@ import java.util.Map;
 @Data
 public class PrincipalDetails implements UserDetails {
 
-    private User user;
+    private final User user;
 
     //이건 OAuth2User 인스턴스 생성을 위해 주입
     //private Map<String, Object> attributes;
 
     public PrincipalDetails(User user) {
         this.user = user;
+    }
+
+    public Long getUserId() {
+        return user.getId();
     }
     //이건 OAuth2User 인스턴스 생성을 위해 필요한 생성자
 //    public PrincipalDetails(User user, Map<String, Object> attributes) {

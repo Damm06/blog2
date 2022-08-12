@@ -37,11 +37,20 @@ public class BoardService {
     }
 
     //게시글 저장
-    public Long createBoard(BoardRequest boardRequest, User loginUser) {
-        Board board = boardRepository.save(boardRequest.toBoardWithLoginUser(loginUser));
-        return board.getId();
+//    public Long createBoard(BoardRequest boardRequest, User loginUser) {
+//        Board board = boardRepository.save(boardRequest.toBoardWithLoginUser(loginUser));
+//        return board.getId();
+//
+//    }
 
+    public Board writeBoard(BoardRequest boardRequest) {
+//        User user = userRepository.findById(userId).orElseThrow(() ->
+//                new BusinessLogicException(ExceptionCode.USER_NOT_FOUND));
+        //Board board = new Board(boardRequest);
+        return boardRepository.save(boardRequest.toEntity());
     }
+
+
 //    public Board createBoard(Board board) {
 //        Board savedBoard = saveBoard(board);
 //        return savedBoard;
