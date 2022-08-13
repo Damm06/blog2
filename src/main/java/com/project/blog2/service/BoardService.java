@@ -2,16 +2,11 @@ package com.project.blog2.service;
 
 import com.project.blog2.config.auth.PrincipalDetails;
 import com.project.blog2.domain.Board;
-import com.project.blog2.domain.User;
-import com.project.blog2.dto.board.BoardPostDto;
-import com.project.blog2.dto.board.BoardRequest;
-import com.project.blog2.dto.board.BoardResponseDto;
-import com.project.blog2.dto.board.BoardUpdateDto;
+import com.project.blog2.dto.board.BoardRequestDto;
 import com.project.blog2.exception.BusinessLogicException;
 import com.project.blog2.exception.ExceptionCode;
 import com.project.blog2.repository.BoardRepository;
 import com.project.blog2.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.util.Optional;
 
@@ -43,11 +37,13 @@ public class BoardService {
 //
 //    }
 
-    public Board writeBoard(BoardRequest boardRequest) {
+    public Board writeBoard(BoardRequestDto boardRequestDto, PrincipalDetails principalDetails) {
 //        User user = userRepository.findById(userId).orElseThrow(() ->
 //                new BusinessLogicException(ExceptionCode.USER_NOT_FOUND));
-        //Board board = new Board(boardRequest);
-        return boardRepository.save(boardRequest.toEntity());
+        Board board = boardRequestDto.toEntity();
+        board.setUser(principalDetails.getUser());
+
+        return boardRepository.save(board);
     }
 
 

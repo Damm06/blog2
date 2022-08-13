@@ -1,9 +1,8 @@
 package com.project.blog2.mapper;
 
-import com.project.blog2.config.auth.PrincipalDetails;
 import com.project.blog2.domain.Board;
 import com.project.blog2.domain.User;
-import com.project.blog2.dto.board.BoardRequest;
+import com.project.blog2.dto.board.BoardRequestDto;
 import com.project.blog2.dto.board.BoardResponseDto;
 import com.project.blog2.dto.board.BoardUpdateDto;
 import org.mapstruct.Mapper;
@@ -30,8 +29,8 @@ public interface BoardMapper {
 //    return board;
 //}
 
-    default Board boardPostDtoToBoard(BoardRequest boardRequest, User user) {
-        Board board = new Board(boardRequest, user);
+    default Board boardPostDtoToBoard(BoardRequestDto boardRequestDto, User user) {
+        Board board = new Board(boardRequestDto, user);
         return board;
     }
 

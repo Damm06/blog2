@@ -1,19 +1,17 @@
 package com.project.blog2.dto.board;
 
 import com.project.blog2.domain.Board;
-import com.project.blog2.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 
 @Data
 @AllArgsConstructor
-public class BoardRequest {
+public class BoardRequestDto {
     private String title;
     private String content;
 
 
-    private BoardRequest() {
+    private BoardRequestDto() {
     }
 
 //    public BoardRequest(Board board) {

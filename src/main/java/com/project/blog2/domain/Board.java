@@ -1,7 +1,7 @@
 package com.project.blog2.domain;
 
 import com.project.blog2.audit.BaseTimeEntity;
-import com.project.blog2.dto.board.BoardRequest;
+import com.project.blog2.dto.board.BoardRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,7 +27,7 @@ public class Board extends BaseTimeEntity {
 //    private int count;
 
     @ManyToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "userId", nullable = false)
     private User user;
 
     @Builder
@@ -45,9 +45,9 @@ public class Board extends BaseTimeEntity {
     }
 
     @Builder
-    public Board(BoardRequest boardRequest, User user) {
-        this.title = boardRequest.getTitle();
-        this.content = boardRequest.getContent();
+    public Board(BoardRequestDto boardRequestDto, User user) {
+        this.title = boardRequestDto.getTitle();
+        this.content = boardRequestDto.getContent();
         this.user = user;
     }
 
