@@ -1,12 +1,13 @@
 package com.project.blog2.domain;
 
 import com.project.blog2.audit.BaseTimeEntity;
+import com.project.blog2.config.auth.PrincipalDetails;
 import com.project.blog2.dto.board.BoardRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
 
-@NoArgsConstructor
+
 //@AllArgsConstructor
 @Getter
 @Setter
@@ -25,10 +26,14 @@ public class Board extends BaseTimeEntity {
     private String content;
 
 //    private int count;
+//    private String author;
 
     @ManyToOne
     @JoinColumn(name = "userId", nullable = false)
     private User user;
+
+    public Board() {
+    }
 
     @Builder
     public Board(Long id, String title, String content, User user) {

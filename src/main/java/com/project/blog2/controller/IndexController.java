@@ -3,8 +3,12 @@ package com.project.blog2.controller;
 import com.project.blog2.config.auth.PrincipalDetails;
 import com.project.blog2.domain.RoleType;
 import com.project.blog2.domain.User;
+import com.project.blog2.dto.SingleResponseDto;
+import com.project.blog2.dto.user.UserUpdateDto;
 import com.project.blog2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -12,9 +16,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class IndexController {
@@ -68,16 +70,18 @@ public class IndexController {
         return "redirect:/login";
     }
 
-    @Secured("ROLE_ADMIN")
-    @GetMapping("/info")
-    public @ResponseBody String info() {
-        return "info";
-    }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/data")
-    public @ResponseBody String data() {
-        return "data";
-    }
+
+//    @Secured("ROLE_ADMIN")
+//    @GetMapping("/info")
+//    public @ResponseBody String info() {
+//        return "info";
+//    }
+//
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @GetMapping("/data")
+//    public @ResponseBody String data() {
+//        return "data";
+//    }
 
 }

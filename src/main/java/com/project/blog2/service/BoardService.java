@@ -103,9 +103,9 @@ public class BoardService {
 //        return boardRepository.updateBoard(boardPostDto);
 //    }
 
-    public Board saveBoard(Board board) {
-        return boardRepository.save(board);
-    }
+//    public Board saveBoard(Board board) {
+//        return boardRepository.save(board);
+//    }
 
 @Transactional(readOnly = true) //글이 있는지 조회
     private Board findVerifiedBoard(long id) {

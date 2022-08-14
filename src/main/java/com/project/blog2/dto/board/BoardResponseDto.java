@@ -22,7 +22,7 @@ public class BoardResponseDto {
     private Long id;
     private String title;
     private String content;
-    private int count;
+//    private int count;
     private User user;
     private LocalDateTime registerTime;
 

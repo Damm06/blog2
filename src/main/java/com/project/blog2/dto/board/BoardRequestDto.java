@@ -10,13 +10,8 @@ public class BoardRequestDto {
     private String title;
     private String content;
 
-
     private BoardRequestDto() {
     }
-
-//    public BoardRequest(Board board) {
-//        this.user = User.builder().build();
-//    }
 
     public Board toEntity() {
         return Board.builder()
@@ -24,12 +19,4 @@ public class BoardRequestDto {
                 .content(content)
                 .build();
     }
-
-//    public Board toBoardWithLoginUser(User loginUser) {
-//        return new Board(
-//                title,
-//                content,
-//                loginUser);
-//    }
-
 }
