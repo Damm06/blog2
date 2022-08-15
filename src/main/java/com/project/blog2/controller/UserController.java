@@ -35,7 +35,7 @@ public class UserController {
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     public ResponseEntity updateUserInfo(@PathVariable long id,
                                          @RequestBody UserUpdateDto userUpdateDto) {
-
+        userUpdateDto.setId(id);
         User user = userService.updateUser(mapper.userUpdateToUser(userUpdateDto));
 
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.userToUserResponse(user)),

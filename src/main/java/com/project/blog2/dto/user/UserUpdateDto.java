@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class UserUpdateDto {
+    private Long id;
     private String email;
     private String password;
 
@@ -14,5 +15,9 @@ public class UserUpdateDto {
     public UserUpdateDto(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

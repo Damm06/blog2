@@ -79,16 +79,18 @@ public class BoardService {
 //        updateBoard.update(requestDto.getTitle(), requestDto.getContent());
 //        return id;
 //    }
-    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
+
+    //트랜잭션 기본 옵션. 부모 트랜잭션이 존재하면 합류하고 아니면 새로 만듦. 중간에 자식/부모에서 rollback 발생하면 모두 rollback함
+    @Transactional
     public Board updateBoard(Board board) {
         Board findBoard = findVerifiedBoard(board.getId());
 
         Optional.ofNullable(board.getTitle())
-                .ifPresent(findBoard::setTitle);
-        //.ifPresent(boardTitle -> boardFind.setTitle(boardTitle)); 람다식 변경 전
+//                .ifPresent(findBoard::setTitle); //람다식 변경후
+        .ifPresent(boardTitle -> findBoard.setTitle(boardTitle));
         Optional.ofNullable(board.getContent())
-                .ifPresent(findBoard::setContent);
-        //.ifPresent(boardContent -> boardFind.setContent(boardContent)); 람다식 변경 전
+//                .ifPresent(findBoard::setContent);
+        .ifPresent(boardContent -> findBoard.setContent(boardContent));
         return boardRepository.save(findBoard);
     }
 

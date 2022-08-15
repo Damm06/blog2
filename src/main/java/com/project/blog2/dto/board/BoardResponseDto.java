@@ -6,10 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 
@@ -36,10 +32,4 @@ public class BoardResponseDto {
 //        this.registerTime = entity.getCreatedAt();
 //    }
 
-//    @Override
-//    public String toString() {
-//        return "BoardListDto [id=" + id + ", title=" + title + ", content=" + content
-//        + ", count=" + count + ", author=" + author + ", registerTime=" + registerTime
-//        + "]";
-//    }
 }
