@@ -1,6 +1,7 @@
 package com.project.blog2.service;
 
 import com.project.blog2.domain.Board;
+import com.project.blog2.domain.RoleType;
 import com.project.blog2.domain.User;
 import com.project.blog2.exception.BusinessLogicException;
 import com.project.blog2.exception.ExceptionCode;
@@ -8,6 +9,7 @@ import com.project.blog2.repository.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,8 +21,11 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    private final BCryptPasswordEncoder encoder;
+
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder encoder) {
         this.userRepository = userRepository;
+        this.encoder = encoder;
     }
 
     //회원가입시 정보 저장
@@ -32,15 +37,17 @@ public class UserService {
 
     //회원 정보 수정
     public User updateUser(User user) {
-        User findUser = findVerifiedUser(user.getId());
+        User findUser = userRepository.findById(user.getId()).orElseThrow(() ->{
+            return new IllegalArgumentException("User does not exist");
+        });
+        String rawPassword = user.getPassword();
+        String encPassword = encoder.encode(rawPassword);
 
         Optional.ofNullable(user.getEmail())
                 .ifPresent(findUser::setEmail);
-        //.ifPresent(boardTitle -> boardFind.setTitle(boardTitle)); 람다식 변경 전
         Optional.ofNullable(user.getPassword())
-                .ifPresent(findUser::setPassword);
-        //.ifPresent(boardContent -> boardFind.setContent(boardContent)); 람다식 변경 전
-        return userRepository.save(findUser);
+                .ifPresent(password -> findUser.setPassword(encPassword));
+        return findUser;
     }
 
     //회원 id로 특정 회원 조회 - admin 기능
