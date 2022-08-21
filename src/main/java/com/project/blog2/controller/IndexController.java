@@ -69,19 +69,4 @@ public class IndexController {
 
         return "redirect:/login";
     }
-
-
-
-//    @Secured("ROLE_ADMIN")
-//    @GetMapping("/info")
-//    public @ResponseBody String info() {
-//        return "info";
-//    }
-//
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
-//    @GetMapping("/data")
-//    public @ResponseBody String data() {
-//        return "data";
-//    }
-
 }

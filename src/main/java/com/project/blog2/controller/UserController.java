@@ -56,5 +56,5 @@ public class UserController {
         userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
+    //회원 탈퇴 기능은 DB에서 완전 삭제하기 보다는 Y/N 로 변경해서 조회만 다르게 할 수 있게 로직 변경하기
 }
