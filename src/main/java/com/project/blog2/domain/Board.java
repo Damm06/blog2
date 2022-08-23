@@ -25,7 +25,7 @@ public class Board extends BaseTimeEntity {
     @Lob
     private String content;
 
-//    private int count;
+    private int count;
 //    private String author;
 
     @ManyToOne

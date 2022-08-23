@@ -4,7 +4,6 @@ import com.project.blog2.audit.BaseTimeEntity;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import java.util.ArrayList;
 import java.util.List;
 
